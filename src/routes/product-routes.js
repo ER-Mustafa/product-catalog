@@ -16,12 +16,16 @@ router.get("/filter", (req, res, next) => {
   console.log("this will filter products");
 });
 
-router.patch("/update", (req, res, next) => {
-  console.log("this will update a product");
+router.patch("/edit", (req, res, next) => {
+  productController.editProduct(req, res, next);
 });
 
 router.delete("/delete", (req, res, next) => {
   console.log("this will delete a product");
+});
+
+router.delete("/delete-all", (req, res, next) => {
+  productController.deleteAllProducts(req, res, next);
 });
 
 module.exports = router;

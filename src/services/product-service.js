@@ -1,5 +1,4 @@
 const Product = require("../models/product");
-const Category = require("../models/category");
 const categoryService = require("../services/category-service");
 
 const createProduct = async (req) => {
@@ -9,7 +8,9 @@ const createProduct = async (req) => {
 
   if (!category) {
     try {
-      category = await categoryService.createCategory(categoryName);
+      category = await categoryService.createCategory({
+        body: { name: categoryName },
+      });
     } catch (error) {
       throw error;
     }
@@ -29,6 +30,51 @@ const createProduct = async (req) => {
   }
 };
 
+const editProduct = async (req) => {
+  const { title, description, price, categoryName } = req.body;
+
+  let category = await categoryService.getCategoryByName(categoryName);
+
+  if (!category) {
+    try {
+      category = await categoryService.createCategory({
+        body: { name: categoryName },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  try {
+    const product = await Product.findOne({ title }).exec();
+    if (!product) {
+      throw new Error("Product not found!");
+    }
+    await Product.updateOne(
+      { _id: product._id },
+      {
+        $set: {
+          description: description,
+          price: price,
+          categoryId: category._id,
+        },
+      }
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteAll = async () => {
+  try {
+    await Product.deleteMany({});
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   createProduct,
+  deleteAll,
+  editProduct,
 };

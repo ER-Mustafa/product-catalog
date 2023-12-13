@@ -1,6 +1,6 @@
 const Category = require("../models/category");
 
-getCategoryByName = async (name) => {
+const getCategoryByName = async (name) => {
   try {
     const category = await Category.findOne({ name }).exec();
     return category || null;
@@ -10,9 +10,11 @@ getCategoryByName = async (name) => {
   }
 };
 
-createCategory = async (name) => {
+const createCategory = async (req) => {
+  const { name, description } = req.body;
   const category = new Category({
     name,
+    description,
   });
   try {
     return category.save();
@@ -22,7 +24,34 @@ createCategory = async (name) => {
   }
 };
 
+const editCategory = async (req) => {
+  const { name, description } = req.body;
+  console.log(name);
+  try {
+    const category = await getCategoryByName(name);
+    if (!category) {
+      throw new Error("Category not found!");
+    }
+    await Category.updateOne(
+      { _id: category._id },
+      { $set: { description: description } }
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteAll = async () => {
+  try {
+    await Category.deleteMany({});
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getCategoryByName,
   createCategory,
+  editCategory,
+  deleteAll,
 };
