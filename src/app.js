@@ -14,7 +14,6 @@ app.use("/category", categoryRoutes);
 try {
   mongoose.connect(process.env.MONGODB_URI);
   if (process.env.NODE_ENV !== "test") {
-    console.log("here");
     app.listen(process.env.PORT || 3000);
   }
   console.info("Connected to database!");

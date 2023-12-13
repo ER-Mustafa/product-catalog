@@ -36,3 +36,14 @@ exports.deleteAllProducts = async (req, res, next) => {
     console.error("Error deleting products:", error);
   }
 };
+
+exports.getAllProducts = async (req, res, next) => {
+  try {
+    const products = await productService.getAllProducts();
+    res.status(200).json({
+      products,
+    });
+  } catch (error) {
+    console.error("Error getting products:", error);
+  }
+};

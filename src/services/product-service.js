@@ -73,8 +73,18 @@ const deleteAll = async () => {
   }
 };
 
+const getAllProducts = async () => {
+  try {
+    const products = await Product.find({}).exec();
+    return products;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   createProduct,
   deleteAll,
   editProduct,
+  getAllProducts,
 };

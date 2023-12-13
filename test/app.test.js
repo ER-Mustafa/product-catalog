@@ -46,4 +46,10 @@ describe("Product API", () => {
 
     expect(response.statusCode).toBe(200);
   });
+
+  it("should get all the products", async () => {
+    const response = await request(app).get("/product/all");
+
+    expect(response.statusCode).toBe(200);
+  });
 });

@@ -9,7 +9,7 @@ router.post("/create", (req, res, next) => {
 });
 
 router.get("/all", (req, res, next) => {
-  console.log("this will return all products");
+  productController.getAllProducts(req, res, next);
 });
 
 router.get("/filter", (req, res, next) => {
