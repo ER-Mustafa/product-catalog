@@ -33,15 +33,18 @@ const createProduct = async (req) => {
 const editProduct = async (req) => {
   const { title, description, price, categoryName } = req.body;
 
-  let category = await categoryService.getCategoryByName(categoryName);
+  let category;
+  if (categoryName) {
+    category = await categoryService.getCategoryByName(categoryName);
 
-  if (!category) {
-    try {
-      category = await categoryService.createCategory({
-        body: { name: categoryName },
-      });
-    } catch (error) {
-      throw error;
+    if (!category) {
+      try {
+        category = await categoryService.createCategory({
+          body: { name: categoryName },
+        });
+      } catch (error) {
+        throw error;
+      }
     }
   }
 
@@ -54,9 +57,9 @@ const editProduct = async (req) => {
       { _id: product._id },
       {
         $set: {
-          description: description,
-          price: price,
-          categoryId: category._id,
+          description: description ? description : product.description,
+          price: price ? price : product.price,
+          categoryId: categoryName ? category._id : product.categoryId,
         },
       }
     );
@@ -82,9 +85,46 @@ const getAllProducts = async () => {
   }
 };
 
+const deleteProduct = async (req) => {
+  try {
+    await Product.deleteOne({ title: req.body.title });
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getProducts = async (req) => {
+  // filter products by name and category
+  const { title, categoryName } = req.body;
+  try {
+    let category;
+
+    if (categoryName) {
+      category = await categoryService.getCategoryByName(categoryName);
+
+      if (!category) {
+        throw new Error("Category not found!");
+      }
+
+      return Product.find({
+        title: title ? title : { $regex: ".*" },
+        categoryId: category._id,
+      });
+    } else {
+      return Product.find({
+        title: title ? title : { $regex: ".*" },
+      });
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   createProduct,
   deleteAll,
   editProduct,
   getAllProducts,
+  deleteProduct,
+  getProducts,
 };

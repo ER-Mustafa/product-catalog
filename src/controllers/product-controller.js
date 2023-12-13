@@ -1,6 +1,5 @@
 const productService = require("../services/product-service");
 
-// req should be { title, description, price, categoryName }
 exports.createProduct = async (req, res, next) => {
   try {
     await productService.createProduct(req);
@@ -22,6 +21,9 @@ exports.editProduct = async (req, res, next) => {
       message: "Product edited successfully!",
     });
   } catch (error) {
+    res.status(400).json({
+      message: "Product edit failed!",
+    });
     console.error("Error editing product:", error);
   }
 };
@@ -33,6 +35,9 @@ exports.deleteAllProducts = async (req, res, next) => {
       message: "All products deleted successfully!",
     });
   } catch (error) {
+    res.status(400).json({
+      message: "Error deleting products!",
+    });
     console.error("Error deleting products:", error);
   }
 };
@@ -44,6 +49,37 @@ exports.getAllProducts = async (req, res, next) => {
       products,
     });
   } catch (error) {
+    res.status(400).json({
+      message: "Error getting products!",
+    });
+    console.error("Error getting products:", error);
+  }
+};
+
+exports.deleteProduct = async (req, res, next) => {
+  try {
+    await productService.deleteProduct(req);
+    res.status(200).json({
+      message: "Product deleted successfully!",
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Product deletion failed!",
+    });
+    console.error("Error deleting product:", error);
+  }
+};
+
+exports.getProducts = async (req, res, next) => {
+  try {
+    const products = await productService.getProducts(req);
+    res.status(200).json({
+      products,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Error getting products!",
+    });
     console.error("Error getting products:", error);
   }
 };
