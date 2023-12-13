@@ -17,3 +17,5 @@ try {
 } catch (error) {
   console.error("Connection failed!", error);
 }
+
+module.exports = app;
