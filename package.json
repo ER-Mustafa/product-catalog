@@ -1,0 +1,29 @@
+{
+  "name": "product_catalog",
+  "version": "1.0.0",
+  "description": "This is an api that queries a product catalog.",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ER-Mustafa/product-catalog.git"
+  },
+  "author": "ER-Mustafa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ER-Mustafa/product-catalog/issues"
+  },
+  "homepage": "https://github.com/ER-Mustafa/product-catalog#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
