@@ -35,6 +35,8 @@ To get started with this project, follow these steps:
 
 - `!feature` : means the feature is required for the successful transaction. If the feature does not have exclamation mark in front of it, it means that this feature is optional for that json file.
 
+- Below the port 3000 is used but you can change the port as you wish. If you change the port then you will make calls to `localhost:PORT`
+
 - !!! `title` is unique for `product` and `name` is unique for `category` so be careful. They are like the key of these objects.
 
 - ### Create a Product
