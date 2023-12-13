@@ -94,7 +94,6 @@ const deleteProduct = async (req) => {
 };
 
 const getProducts = async (req) => {
-  // filter products by name and category
   const { title, categoryName } = req.body;
   try {
     let category;
