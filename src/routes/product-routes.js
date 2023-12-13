@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
+const productController = require("../controllers/product-controller");
+
+// req should be { title, description, price, categoryName }
 router.post("/create", (req, res, next) => {
-  console.log("this will register a product to product catalog");
+  productController.createProduct(req, res, next);
 });
 
 router.get("/all", (req, res, next) => {
