@@ -5,7 +5,6 @@ const getCategoryByName = async (name) => {
     const category = await Category.findOne({ name }).exec();
     return category || null;
   } catch (error) {
-    console.error("Error getting category by name:", error);
     throw error;
   }
 };
@@ -19,7 +18,6 @@ const createCategory = async (req) => {
   try {
     return category.save();
   } catch (error) {
-    console.error("Error creating category:", error);
     throw error;
   }
 };
