@@ -7,7 +7,7 @@ exports.createCategory = async (req, res, next) => {
       message: "Category created successfully!",
     });
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       message: "Category creation failed!",
     });
     console.error("Error creating category:", error);
@@ -21,6 +21,10 @@ exports.editCategory = async (req, res, next) => {
       message: "Category edited successfully!",
     });
   } catch (error) {
+    const stat = error.message == "Category not found!" ? 400 : 500;
+    res.status(stat).json({
+      message: "Category edited successfully!",
+    });
     console.error("Error editing category:", error);
   }
 };
@@ -32,6 +36,9 @@ exports.deleteAllCategories = async (req, res, next) => {
       message: "All categories deleted successfully!",
     });
   } catch (error) {
+    res.status(500).json({
+      message: "Error deleting categories!",
+    });
     console.error("Error deleting categories:", error);
   }
 };
