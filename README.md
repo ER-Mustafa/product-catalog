@@ -86,3 +86,15 @@ To get started with this project, follow these steps:
 
   - DELETE request to `localhost:3000/category/delete-all`
   - req.body -> `{}`
+
+## Additional Things and Feedback
+
+- I did not write comments because there was no complex logic. Instead, I tried to assign good and self explanatory variable and function names.
+
+- It is not very clear whether the category is model or not. If it is a model (I took it in that way), you may explain its features.
+
+- The test may should include more complex queries or algorithms and you can give the structure beforehand to balance the test.
+
+- I had not known how to implement unit tests and jest so hopefully I learnt it well and implemented it well.
+
+- I love to build things and the test was building something so I enjoyed it.
