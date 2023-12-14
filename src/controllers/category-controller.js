@@ -21,7 +21,7 @@ exports.editCategory = async (req, res, next) => {
       message: "Category edited successfully!",
     });
   } catch (error) {
-    const stat = error.message == "Category not found!" ? 400 : 500;
+    const stat = error.message == "Category not found! Bad Request" ? 400 : 500;
     res.status(stat).json({
       message: "Category edited successfully!",
     });

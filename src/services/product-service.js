@@ -51,7 +51,7 @@ const editProduct = async (req) => {
   try {
     const product = await Product.findOne({ title }).exec();
     if (!product) {
-      throw new Error("Product not found!");
+      throw new Error("Product not found! Bad Request");
     }
     await Product.updateOne(
       { _id: product._id },
@@ -102,7 +102,7 @@ const getProducts = async (req) => {
       category = await categoryService.getCategoryByName(categoryName);
 
       if (!category) {
-        throw new Error("Category not found!");
+        throw new Error("Category not found! Bad Request");
       }
 
       return Product.find({

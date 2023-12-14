@@ -69,6 +69,26 @@ describe("Product API", () => {
     expect(response.statusCode).toBe(200);
   });
 
+  it("should not edit a product", async () => {
+    const response = await request(app).patch("/product/edit").send({
+      title: "Untitled",
+      description: "Undescription",
+      price: 0,
+      categoryName: "ElectronicsV2",
+    });
+
+    expect(response.statusCode).toBe(400);
+  });
+
+  it("should not edit a category", async () => {
+    const response = await request(app).patch("/category/edit").send({
+      name: "unnamed",
+      description: "undescription",
+    });
+
+    expect(response.statusCode).toBe(400);
+  });
+
   it("should get all the products", async () => {
     const response = await request(app).get("/product/all");
 

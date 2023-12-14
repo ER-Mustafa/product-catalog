@@ -21,7 +21,7 @@ exports.editProduct = async (req, res, next) => {
       message: "Product edited successfully!",
     });
   } catch (error) {
-    const stat = error.message == "Product not found!" ? 400 : 500;
+    const stat = error.message == "Product not found! Bad Request" ? 400 : 500;
     res.status(stat).json({
       message: "Product edit failed!",
     });
@@ -79,7 +79,7 @@ exports.getProducts = async (req, res, next) => {
       products,
     });
   } catch (error) {
-    const stat = error.message == "Category not found!" ? 400 : 500;
+    const stat = error.message == "Category not found! Bad Request" ? 400 : 500;
     res.status(stat).json({
       message: "Error getting products!",
     });

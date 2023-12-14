@@ -24,11 +24,10 @@ const createCategory = async (req) => {
 
 const editCategory = async (req) => {
   const { name, description } = req.body;
-  console.log(name);
   try {
     const category = await getCategoryByName(name);
     if (!category) {
-      throw new Error("Category not found!");
+      throw new Error("Category not found! Bad Request");
     }
     await Category.updateOne(
       { _id: category._id },
